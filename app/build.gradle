@@ -11,10 +11,10 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 
 android {
-    namespace 'com.shanemaglangit.a2020'
+    namespace 'com.mattgdot.a2020'
     compileSdk 33
     defaultConfig {
-        applicationId "com.shanemaglangit.a2020"
+        applicationId "com.mattgdot.a2020"
         versionCode 2
         versionName "2.0"
         minSdk 23

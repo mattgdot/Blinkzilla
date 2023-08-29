@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.shanemaglangit.a2020"
+    package="com.mattgdot.a2020"
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -27,13 +27,13 @@
             android:value="${admobId}"/>
 
         <service
-            android:name=".service.BreakService"
+            android:name="com.mattgdot.a2020.service.BreakService"
             android:enabled="true"
             android:exported="false"
             />
 
         <activity
-            android:name=".setting.SettingActivity"
+            android:name="com.mattgdot.a2020.setting.SettingActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"
             android:exported="true">
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".rest.RestActivity"
+            android:name="com.mattgdot.a2020.rest.RestActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 

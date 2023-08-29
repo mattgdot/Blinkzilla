@@ -6,7 +6,7 @@
     <data>
         <variable
             name="settingViewModel"
-            type="com.shanemaglangit.a2020.setting.SettingViewModel" />
+            type="com.mattgdot.a2020.setting.SettingViewModel" />
     </data>
 
     <ScrollView
