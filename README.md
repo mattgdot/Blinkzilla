@@ -14,7 +14,11 @@ To build this project, create the `apikey.properties` file in the root folder an
 ADMOB_ID=yourAdmobId
 AD_BANNER_ID=yourBannerAdId
 AD_BANNER_TEST_ID=ca-app-pub-3940256099942544/6300978111
-```    
+```
+
+# Screenshots
+![Preferences screen](https://cdn.discordapp.com/attachments/1129376271541997568/1146120510195912724/Screenshot_20230829_173226_framed.png)
+![Reminder screen](https://cdn.discordapp.com/attachments/1129376271541997568/1146120510451761232/Screenshot_20230829_173833_framed.png)
 
 # Note
 This is a fork of @ShaneMaglangit's project. I updated it to work on newer Android versions and also improved some stuff. I will possibly rewrite it completely in the future.
