@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">2020</string>
+    <string name="app_name">Break Reminder</string>
     <string name="text_duration">SECONDS</string>
     <string name="text_duration_sub">duration of breaks</string>
     <string name="text_work">MINUTES</string>

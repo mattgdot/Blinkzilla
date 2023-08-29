@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.mattgdot.a2020.R
 import com.mattgdot.a2020.databinding.ActivityRestBinding
 
@@ -18,6 +20,8 @@ class RestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MobileAds.initialize(this) {}
+
+        val analytics = Firebase.analytics
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_rest)
 

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
+    id 'com.google.firebase.crashlytics'
 }
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
@@ -15,8 +16,8 @@ android {
     compileSdk 33
     defaultConfig {
         applicationId "com.mattgdot.a2020"
-        versionCode 2
-        versionName "2.0"
+        versionCode 5
+        versionName "1.0"
         minSdk 23
         targetSdk 33
 
@@ -59,6 +60,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'com.google.firebase:firebase-analytics-ktx:21.3.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.4.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

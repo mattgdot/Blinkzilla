@@ -24,6 +24,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.*
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 import com.mattgdot.a2020.databinding.ActivityMainBinding
 import com.mattgdot.a2020.setRatingText
@@ -53,6 +55,8 @@ class SettingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val analytics = Firebase.analytics
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 

@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/rubik_medium"
+
                 android:text="@string/text_performance"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold" />
@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-                        android:fontFamily="@font/montserrat"
+
                         android:text="@string/text_rating_sub"
                         android:textColor="@color/primaryColor"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                         android:id="@+id/text_total_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_medium"
+
                         android:text="@string/text_total_sub"
                         android:textColor="@color/primaryColor"
                         app:layout_constraintBaseline_toBaselineOf="@+id/text_completed_sub"
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:fontFamily="@font/rubik_medium"
+
                         android:text="@string/text_completed_sub"
                         android:textColor="@color/primaryColor"
                         app:layout_constraintEnd_toStartOf="@+id/text_skipped_sub"
@@ -140,7 +140,7 @@
                         android:id="@+id/text_skipped_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_medium"
+
                         android:text="@string/text_skipped_sub"
                         android:textColor="@color/primaryColor"
                         app:layout_constraintBaseline_toBaselineOf="@+id/text_completed_sub"
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/rubik_medium"
+
                 android:text="@string/text_preferences"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold" />
@@ -187,16 +187,16 @@
                         android:textSize="38sp"
                         android:textStyle="bold"
                         app:layout_constraintDimensionRatio="w,1:1"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/text_work_num"
                         app:layout_constraintHorizontal_bias="0.26"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/text_work_num"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/text_duration_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
+
                         android:labelFor="@id/text_duration_num"
                         android:text="@string/text_duration_sub"
                         android:textColor="@color/design_default_color_on_secondary"
@@ -208,7 +208,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:fontFamily="@font/rubik_medium"
+
                         android:labelFor="@id/text_duration_num"
                         android:text="@string/text_duration"
                         android:textColor="@color/design_default_color_on_secondary"
@@ -255,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:fontFamily="@font/rubik_medium"
+
                         android:labelFor="@id/text_duration_num"
                         android:text="@string/text_work"
                         android:textColor="@color/design_default_color_on_secondary"
@@ -270,7 +270,7 @@
                         android:id="@+id/text_work_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
+
                         android:labelFor="@id/text_work_num"
                         android:text="@string/text_work_sub"
                         android:textColor="@color/design_default_color_on_secondary"
@@ -300,7 +300,7 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginEnd="24dp"
                         android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/montserrat"
+
                         android:onClick="@{() -> settingViewModel.toggleBreaks()}"
                         android:text="@{settingViewModel.isEnabled}"
                         android:textStyle="bold"
