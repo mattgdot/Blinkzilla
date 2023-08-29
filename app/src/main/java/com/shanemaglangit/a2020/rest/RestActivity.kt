@@ -22,8 +22,7 @@ class RestActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_rest)
 
-        restViewModel = ViewModelProvider(this, RestViewModelFactory(application))
-            .get(RestViewModel::class.java)
+        restViewModel = ViewModelProvider(this)[RestViewModel::class.java]
 
         binding.restViewModel = restViewModel
         binding.lifecycleOwner = this
@@ -46,8 +45,7 @@ class RestActivity : AppCompatActivity() {
         // Stops the activity
         restViewModel.endActivity.observe(this, Observer {
             if (it) {
-                if (Build.VERSION.SDK_INT >= 21) finishAndRemoveTask()
-                else finishAffinity()
+                finishAndRemoveTask()
             }
         })
     }

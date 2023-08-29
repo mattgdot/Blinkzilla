@@ -3,13 +3,19 @@ package com.shanemaglangit.a2020.setting
 import android.Manifest
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.ContextThemeWrapper
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,10 +26,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
+
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
 import com.shanemaglangit.a2020.R
 import com.shanemaglangit.a2020.databinding.ActivityMainBinding
@@ -32,58 +38,85 @@ import com.shanemaglangit.a2020.setRatingText
 class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var settingViewModel: SettingViewModel
-    private lateinit var interstitialAd: InterstitialAd
+    private lateinit var requestOverlayPermissionLauncher: ActivityResultLauncher<Intent>
+
+
+    private fun checkOverlayPermission() {
+        if (!Settings.canDrawOverlays(this)) {
+
+            AlertDialog
+                .Builder(ContextThemeWrapper(this@SettingActivity, R.style.AppTheme_Dialog))
+                .setTitle("Permission Required")
+                .setMessage("App needs to appear on top in order to work.")
+                .setCancelable(false)
+                .setPositiveButton("Grant"
+                ) { p0, p1 ->
+                    val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+                    requestOverlayPermissionLauncher.launch(intent)
+                }
+                .show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this) {}
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         settingViewModel = ViewModelProvider(
             this,
-            SettingViewModelFactory(application)
-        ).get(SettingViewModel::class.java)
+        )[SettingViewModel::class.java]
 
         binding.settingViewModel = settingViewModel
         binding.lifecycleOwner = this
 
-        binding.textRating.startTextAnimation(
-            settingViewModel.userRating.value!!, 2500, 1000, true
-        )
+        requestOverlayPermissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode != RESULT_OK) {
+                checkOverlayPermission()
+            }
+        }
 
-        binding.textTotal.startTextAnimation(
-            settingViewModel.totalBreak.value!!,
-            1500,
-            1000
-        )
+        settingViewModel.userRating.observe(this){
+            binding.textRating.startTextAnimation(
+                it, 2500, 1000, true
+            )
+        }
+        settingViewModel.totalBreak.observe(this){
+            binding.textTotal.startTextAnimation(
+                it, 2500, 1000
+            )
+        }
 
-        binding.textCompleted.startTextAnimation(
-            settingViewModel.completedBreak.value!!,
-            1500,
-            1000
-        )
+        settingViewModel.completedBreak.observe(this){
+            binding.textCompleted.startTextAnimation(
+                it,
+                1500,
+                1000
+            )
+        }
 
-        binding.textSkipped.startTextAnimation(
-            settingViewModel.skippedBreak.value!!,
-            1500,
-            1000
-        )
+        settingViewModel.skippedBreak.observe(this){
+            binding.textSkipped.startTextAnimation(
+                it,
+                1500,
+                1000
+            )
+        }
 
         // Set up liveData observers
         settingViewModel.duration.setFieldChangeObserver()
         settingViewModel.work.setFieldChangeObserver()
         settingViewModel.invalidFields.setInvalidFieldObserver()
-        settingViewModel.clickCount.setCountObserver()
+
+        checkOverlayPermission()
 
         // Request for the necessary permissions
         requestPermissions()
+    }
 
-        // Load the interstitial ad
-        loadInterstitialAd()
-
-        // Check SDK version
-        checkSDKVersion()
+    override fun onResume() {
+        super.onResume()
+        settingViewModel.updateStats()
     }
 
     /**
@@ -127,47 +160,13 @@ class SettingActivity : AppCompatActivity() {
         })
     }
 
-
     /**
      * Used to set the observer for observing if the mutableLiveData changed
      */
     private fun MutableLiveData<Int>.setFieldChangeObserver() {
-        this.observe(this@SettingActivity, Observer {
+        this.observe(this@SettingActivity) {
             settingViewModel.fieldsChanged()
-        })
-    }
-
-    /**
-     * Used to set the observer for observing the current click count of the button
-     */
-    private fun LiveData<Int>.setCountObserver() {
-        this.observe(this@SettingActivity, Observer {
-            if (it > 3) {
-                interstitialAd.adListener = object : AdListener() {
-                    override fun onAdClosed() {
-                        super.onAdClosed()
-                        interstitialAd.loadAd(AdRequest.Builder().build())
-                        settingViewModel.enableBreaks()
-                        settingViewModel.resetClickCount()
-                    }
-                }
-
-                if (interstitialAd.isLoaded) interstitialAd.show()
-                else {
-                    settingViewModel.enableBreaks()
-                    settingViewModel.resetClickCount()
-                }
-            }
-        })
-    }
-
-    /**
-     * Used to load the interstitial ad
-     */
-    private fun loadInterstitialAd() {
-        interstitialAd = InterstitialAd(this)
-        interstitialAd.adUnitId = resources.getString(R.string.AD_INTERSTITIAL_ID)
-        interstitialAd.loadAd(AdRequest.Builder().build())
+        }
     }
 
     /**
@@ -193,6 +192,8 @@ class SettingActivity : AppCompatActivity() {
             missingPermissions.add(Manifest.permission.VIBRATE)
         if (!checkPermission(Manifest.permission.RECEIVE_BOOT_COMPLETED))
             missingPermissions.add(Manifest.permission.RECEIVE_BOOT_COMPLETED)
+        if (Build.VERSION.SDK_INT >= 33 && !checkPermission(Manifest.permission.POST_NOTIFICATIONS))
+            missingPermissions.add(Manifest.permission.POST_NOTIFICATIONS)
 
         return missingPermissions.toTypedArray()
     }
@@ -204,21 +205,6 @@ class SettingActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
     /**
-     * Used to check if the app is compatible with the phone's SDK version.
-     * Due to restrictions to starting activities on SDK29+, the app wouldn't function properly
-     * on said SDK version.
-     */
-    private fun checkSDKVersion() {
-        if(Build.VERSION.SDK_INT >= 29) {
-            Snackbar.make(
-                binding.root,
-                "App is not compatible with your Android version.",
-                Snackbar.LENGTH_INDEFINITE
-            ).show()
-        }
-    }
-
-    /**
      * Close the app if the permissions are not granted
      */
     override fun onRequestPermissionsResult(
@@ -227,7 +213,8 @@ class SettingActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 1) {
+
+        if(requestCode == 0) {
             finishAndRemoveTask()
         }
     }

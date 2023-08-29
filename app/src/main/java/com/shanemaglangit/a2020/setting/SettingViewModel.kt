@@ -66,8 +66,7 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
         if (isEnabled.value == false) {
             if ((work.value == 0) or (duration.value == 0)) _invalidFields.value = true
             else {
-                incrementClickCount()
-                if(clickCount.value!! <= 3) enableBreaks()
+                enableBreaks()
             }
         } else if (isEnabled.value == true) {
             disableBreaks()
@@ -130,6 +129,18 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
         ) {
             disableBreaks()
         }
+    }
+
+    fun updateStats(){
+        _totalBreak.value = sharedPreferences.getInt("total_break", 0)
+
+        _completedBreak.value = sharedPreferences.getInt("completed_break", 0)
+
+        _skippedBreak.value = sharedPreferences.getInt("skipped_break", 0)
+
+        _userRating.value = if (_totalBreak.value != 0) {
+            (_completedBreak.value!!.toDouble() / _totalBreak.value!!.toDouble() * 100).toInt()
+        } else 100
     }
 
     /**

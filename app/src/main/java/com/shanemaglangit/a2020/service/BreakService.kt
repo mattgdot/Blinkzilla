@@ -9,10 +9,11 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.shanemaglangit.a2020.setting.SettingActivity
 import com.shanemaglangit.a2020.R
 import com.shanemaglangit.a2020.rest.RestActivity
+import com.shanemaglangit.a2020.setting.SettingActivity
 
 class BreakService : Service() {
     private lateinit var alarmReceiver: BroadcastReceiver
@@ -65,8 +66,11 @@ class BreakService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val settingIntent = Intent(this, SettingActivity::class.java)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        val settingPendingIntent = PendingIntent.getActivity(this, 0, settingIntent, 0)
+
+        val settingPendingIntent = PendingIntent.getActivity(this, 0, settingIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+
         val notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification_icon)
             .setContentTitle("Break reminders are active")
@@ -122,7 +126,7 @@ class BreakService : Service() {
              */
             override fun onFinish() {
                 val restIntent = Intent(this@BreakService, RestActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
                 startActivity(restIntent)
                 startTimer(workDuration + breakDuration)
