@@ -1,7 +1,7 @@
 # 20-20: Break Reminder App
 20-20 is a break reminder app that helps prevent digital eye strain.
 
-Many of us spend hours just tinkering around with our phones. This app lets you set a reminder for you to spend at least 20 seconds every 20 minutes away from your phone. You may look around, think about the things that make you happy, or even grab a glass of water. 
+This app lets you set a reminder for you to spend at least 20 seconds every 20 minutes away from your phone. You may look around, think about the things that make you happy, or even grab a glass of water. 
 
 As prescribed by eye doctors, the 20-20-20 rule does not only prevent eye strains but will also help maintain healthy eyesight.
 
