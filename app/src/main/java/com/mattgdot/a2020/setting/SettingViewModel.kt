@@ -148,23 +148,4 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     fun invalidFieldsDialogComplete() {
         _invalidFields.value = false
     }
-
-    /**
-     * Used to reset the click count observed for showing the ads
-     */
-    fun resetClickCount() {
-        _clickCount.value = 0
-        editor.putInt("click_count", clickCount.value!!)
-        editor.apply()
-    }
-
-    /**
-     * Used to increase click count
-     */
-    private fun incrementClickCount() {
-        // Update the click count
-        _clickCount.value = _clickCount.value?.plus(1) ?: 0
-        editor.putInt("click_count", clickCount.value!!)
-        editor.apply()
-    }
 }

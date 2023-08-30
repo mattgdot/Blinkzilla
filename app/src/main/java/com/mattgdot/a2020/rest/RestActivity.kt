@@ -1,5 +1,6 @@
 package com.mattgdot.a2020.rest
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -36,20 +37,35 @@ class RestActivity : AppCompatActivity() {
         restViewModel.startTimer()
 
         // Toggle the visibility of views once timer ends
-        restViewModel.timeLeft.observe(this, Observer {
+        restViewModel.timeLeft.observe(this) {
             if (it == 0) {
                 binding.textTimeleftCaption.visibility = View.GONE
                 binding.progressTimeElapsed.visibility = View.GONE
                 binding.textTimeleft.visibility = View.GONE
                 binding.buttonEnd.visibility = View.VISIBLE
             }
-        })
+        }
 
         // Stops the activity
-        restViewModel.endActivity.observe(this, Observer {
+        restViewModel.endActivity.observe(this) {
             if (it) {
                 finishAndRemoveTask()
             }
-        })
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        finishAndRemoveTask()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try{
+            finishAndRemoveTask()
+            restViewModel.timer.cancel()
+        } catch (e:Exception){
+
+        }
     }
 }

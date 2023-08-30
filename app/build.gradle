@@ -16,8 +16,8 @@ android {
     compileSdk 33
     defaultConfig {
         applicationId "com.mattgdot.a2020"
-        versionCode 5
-        versionName "1.0"
+        versionCode 7
+        versionName "1.2"
         minSdk 23
         targetSdk 33
 

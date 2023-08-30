@@ -18,7 +18,7 @@ class RestViewModel(application: Application) : AndroidViewModel(application) {
         application.getSharedPreferences("user_pref", Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
 
-    private lateinit var timer: CountDownTimer
+    lateinit var timer: CountDownTimer
 
     // Objects for Ringtone and Vibration
     private val mediaPlayer = MediaPlayer.create(application, R.raw.notification)

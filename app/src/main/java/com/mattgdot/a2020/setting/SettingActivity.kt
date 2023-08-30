@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
@@ -34,7 +35,6 @@ class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var settingViewModel: SettingViewModel
     private lateinit var requestOverlayPermissionLauncher: ActivityResultLauncher<Intent>
-
 
     private fun checkOverlayPermission() {
         if (!Settings.canDrawOverlays(this)) {
@@ -75,12 +75,12 @@ class SettingActivity : AppCompatActivity() {
 
         settingViewModel.userRating.observe(this){
             binding.textRating.startTextAnimation(
-                it, 2500, 1000, true
+                it, 1500, 500, true
             )
         }
         settingViewModel.totalBreak.observe(this){
             binding.textTotal.startTextAnimation(
-                it, 2500, 1000
+                it, 1500, 500
             )
         }
 
@@ -88,7 +88,7 @@ class SettingActivity : AppCompatActivity() {
             binding.textCompleted.startTextAnimation(
                 it,
                 1500,
-                1000
+                500
             )
         }
 
@@ -96,7 +96,7 @@ class SettingActivity : AppCompatActivity() {
             binding.textSkipped.startTextAnimation(
                 it,
                 1500,
-                1000
+                500
             )
         }
 
@@ -201,18 +201,4 @@ class SettingActivity : AppCompatActivity() {
     private fun Context.checkPermission(permission: String): Boolean =
         ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
-    /**
-     * Close the app if the permissions are not granted
-     */
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if(requestCode == 0) {
-            finishAndRemoveTask()
-        }
-    }
 }
