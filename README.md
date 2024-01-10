@@ -1,9 +1,8 @@
 # Blinkzilla: Break Reminder App
-Blinkzilla is a break reminder app that helps prevent digital eye strain.
+Blinkzilla reminds you to take a break from your phone in order prevent digital eye strain. You may look around, think about the things that make you happy, or even grab a glass of water. 
 
-This app lets you set a reminder for you to spend at least 20 seconds every 20 minutes away from your phone. You may look around, think about the things that make you happy, or even grab a glass of water. 
-
-As prescribed by eye doctors, the 20-20-20 rule does not only prevent eye strains but will also help maintain healthy eyesight.
+# About the project
+Blinkzilla is my first app built with Jetpack Compose. It was a great opportunity to familiarize myself with it and experiment stuff. 
 
 # Google Play
 [The app is available to download on Google Play](https://play.google.com/store/apps/details?id=com.mattgdot.a2020)
