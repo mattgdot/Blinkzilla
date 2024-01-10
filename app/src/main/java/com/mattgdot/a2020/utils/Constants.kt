@@ -1,0 +1,10 @@
+package com.mattgdot.a2020.utils
+
+const val SHARED_PREFERENCES = "blinkzilla"
+
+const val TOTAL_BREAKS = "TOTAL_BREAKS"
+const val COMPLETED_BREAKS = "COMPLETED_BREAKS"
+const val BREAK_DURATION = "BREAK_DURATION"
+const val WORK_DURATION = "WORK_DURATION"
+const val BREAK_ENABLED = "BREAK_ENABLED"
+const val CHANNEL_ID = "CHANNEL_BLINKZILLA"

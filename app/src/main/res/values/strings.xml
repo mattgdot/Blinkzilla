@@ -1,24 +1,29 @@
 <resources>
-    <string name="app_name">Break Reminder</string>
-    <string name="text_duration">SECONDS</string>
-    <string name="text_duration_sub">duration of breaks</string>
-    <string name="text_work">MINUTES</string>
-    <string name="text_work_sub">interval between breaks</string>
-    <string name="button_start">Start breaks</string>
-    <string name="button_stop">Stop breaks</string>
-    <string name="text_counter">An ad will be shown after %d toggles</string>
-
-    <string name="text_performance">YOUR PERFORMANCE</string>
-    <string name="text_preferences">MODIFY YOUR BREAKS</string>
-    <string name="text_rating_sub">YOUR OVERALL RATING</string>
-    <string name="text_total_sub">TOTAL</string>
-    <string name="text_completed_sub">COMPLETED</string>
-    <string name="text_skipped_sub">SKIPPED</string>
-
-    <string name="text_message">Relax your mind, think about the things that makes you happy</string>
-    <string name="text_timeleft_caption">second(s) left</string>
-    <string name="button_end_text">Well done! Tap to close.</string>
-    <string name="wallpaper_description">Wallpaper header</string>
-    <string name="text_ad">This ad helps keep this app free</string>
-    <string name="text_start_value">0</string>
+    <string name="app_name">Blinkzilla</string>
+    <string name="duration_break">Duration of breaks</string>
+    <string name="duration_work">Interval between breaks</string>
+    <string name="modify_breaks">Modify your breaks</string>
+    <string name="your_performance">Your performance</string>
+    <string name="your_rating">Your overall rating</string>
+    <string name="total_breaks">Total</string>
+    <string name="total_completed">Completed</string>
+    <string name="total_skipped">Skipped</string>
+    <string name="start_breaks">Start breaks</string>
+    <string name="stop_breaks">Stop breaks</string>
+    <string name="seconds">Seconds</string>
+    <string name="minutes">Minutes</string>
+    <string name="notification_channel">Notification channel</string>
+    <string name="notification_title">Break reminders are active</string>
+    <string name="notification_content">Click here to modify your preferences</string>
+    <string name="take_break">Take a break. Relax your eyes.</string>
+    <string name="seconds_left">second(s) left</string>
+    <string name="well_done">Well done!</string>
+    <string name="permission_missing">Notification permission is denied</string>
+    <string name="permission_required">"App needs to appear on top in order to work."</string>
+    <string name="permission_overlay">"App needs to appear on top in order to work."</string>
+    <string name="break_enabled">Breaks started</string>
+    <string name="break_stopped">Stopped breaks</string>
+    <string name="positive">Grant</string>
+    <string name="negative">Dismiss</string>
+    <string name="close">Tap to close</string>
 </resources>
