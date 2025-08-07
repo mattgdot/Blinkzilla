@@ -14,11 +14,8 @@ It’s minimal, ad-supported, and free to use on all Android devices.
 
 ---
 
-## Download
-
-Available now on Google Play:
-
-[Download Blinkzilla on Google Play](https://play.google.com/store/apps/details?id=com.mattgdot.a2020)
+<h2>Download</h2>  
+<a href="[https://play.google.com/store/apps/details?id=com.app.water4craiova](https://play.google.com/store/apps/details?id=com.mattgdot.a2020)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" width="200"></a> 
 
 ---
 
